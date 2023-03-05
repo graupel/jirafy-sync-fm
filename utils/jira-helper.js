@@ -44,20 +44,25 @@ function parseForWord(arr) {
 }
 
 /**
- * Parses a given string for a version
+ * Parses a given string for a version and appends "-data" at the end
  * @param {String} version String to be parsed for version
- * @returns {String} Parsed version
+ * @returns {String} Parsed version with "-data" appended at the end
  */
 function parseForVersion(version) {
   try {
     const regex = /v\d+.\d+.\d+/g
-    version = [...version.matchAll(regex)]
+    version = [...version.matchAll(regex)][0][0] // get the first match
+
+    // append "-data" at the end of the parsed version
+    version = version + "-data"
+
   } catch (error) {
     core.setFailed(error.message)
   }
 
-  return version.map((m) => m[0])[0]
+  return version
 }
+
 
 /**
  * Returns today's date
