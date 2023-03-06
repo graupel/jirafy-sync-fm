@@ -58147,13 +58147,13 @@ function createVersionAndUpdateFixVersions(changelog, version, url) {
   try {
     // Create a jira version for each project
     projects.forEach(async (project) => {
-      console.log('\x1b[32m%s\x1b[0m', `Attempting to create Jira version: ${version} in project: ${project}`)
+      console.log('\x1b[32m%s\x1b[0m', `Attempting to create Jira version: ${version} in project: ${project}, ${url}`)
 
       var projectId = await getProjectIdByKey(project)
 
       // Adding a hyperlink to version/release repo isn't supported, see https://community.atlassian.com/t5/Jira-discussions/Adding-a-confluence-link-in-a-Release-Version-description-field/td-p/622193
 
-      await createVersion(false, today(), version, url, projectId, false)
+      await createVersion(false, today(), version, `${url}`, projectId, false)
 
       // Set the fix version for each Jira ticket, linking it the jira version
       const issueProperties = `{"update":{"fixVersions":[{"set":[{"name":"${version}"}]}]}}`
