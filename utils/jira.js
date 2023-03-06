@@ -142,7 +142,7 @@ function createVersionAndUpdateFixVersions(changelog, version, url) {
   const tickets = parseChangelogForJiraTickets(changelog)
   // Remove duplicate projects
   const projects = [...new Set(getProjectNameByTicket(tickets))]
-  version = version + '-data'
+  version = version
 
   console.log('\x1b[32m%s\x1b[0m', `Projects are: ${projects}`)
   console.log('\x1b[32m%s\x1b[0m', `Tickets are: ${tickets}`)
@@ -155,6 +155,7 @@ function createVersionAndUpdateFixVersions(changelog, version, url) {
       var projectId = await getProjectIdByKey(project)
 
       // Adding a hyperlink to version/release repo isn't supported, see https://community.atlassian.com/t5/Jira-discussions/Adding-a-confluence-link-in-a-Release-Version-description-field/td-p/622193
+
       await createVersion(false, today(), version, url, projectId, false)
 
       // Set the fix version for each Jira ticket, linking it the jira version
