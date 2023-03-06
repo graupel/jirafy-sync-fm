@@ -4,6 +4,8 @@ async function run() {
   try {
     const changelog = core.getInput('changelog')
     const jiraVersion = core.getInput('jiraVersion')
+    const url = core.getInput('url')
+    
     const regexp = /^[.A-Za-z0-9_-]*$/
 
     if (!changelog) {
@@ -26,12 +28,12 @@ async function run() {
   }
 }
 
-async function syncChangelogToJira(changelog, jiraVersion) {
+async function syncChangelogToJira(changelog, jiraVersion, url) {
   try {
     core.info(`jiraVersion is: ${jiraVersion}`)
     core.info(`changelog is: ${changelog}`)
 
-    createVersionAndUpdateFixVersions(changelog, jiraVersion)
+    createVersionAndUpdateFixVersions(changelog, jiraVersion, url)
   } catch (err) {
     core.setFailed(`Jirafy Sync failed: ${err.message}`)
     process.exit(0)

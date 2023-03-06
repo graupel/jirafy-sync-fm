@@ -138,7 +138,7 @@ async function setIssueProperties(issueId, issueUpdate) {
  * @param {String} changelog Changelog
  * @param {String} version Release version
  */
-function createVersionAndUpdateFixVersions(changelog, version) {
+function createVersionAndUpdateFixVersions(changelog, version, url) {
   const tickets = parseChangelogForJiraTickets(changelog)
   // Remove duplicate projects
   const projects = [...new Set(getProjectNameByTicket(tickets))]
@@ -155,7 +155,8 @@ function createVersionAndUpdateFixVersions(changelog, version) {
       var projectId = await getProjectIdByKey(project)
 
       // Adding a hyperlink to version/release repo isn't supported, see https://community.atlassian.com/t5/Jira-discussions/Adding-a-confluence-link-in-a-Release-Version-description-field/td-p/622193
-      await createVersion(false, today(), version, changelog, projectId, false)
+
+      await createVersion(false, today(), version, url, projectId, false)
 
       // Set the fix version for each Jira ticket, linking it the jira version
       const issueProperties = `{"update":{"fixVersions":[{"set":[{"name":"${version}"}]}]}}`
