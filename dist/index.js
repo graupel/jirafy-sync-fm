@@ -58132,12 +58132,14 @@ async function setIssueProperties(issueId, issueUpdate) {
  *
  * @param {String} changelog Changelog
  * @param {String} version Release version
+  * @param {String} url Release url
  */
 function createVersionAndUpdateFixVersions(changelog, version, url) {
   const tickets = parseChangelogForJiraTickets(changelog)
   // Remove duplicate projects
   const projects = [...new Set(getProjectNameByTicket(tickets))]
   version = version
+  url = url
 
   console.log('\x1b[32m%s\x1b[0m', `Projects are: ${projects}`)
   console.log('\x1b[32m%s\x1b[0m', `Tickets are: ${tickets}`)
