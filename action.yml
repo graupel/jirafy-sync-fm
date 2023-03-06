@@ -17,6 +17,9 @@ inputs:
   jiraToken:
     description: 'Personal Access Token from Jira in lieu of password'
     required: true
+  url:
+    description: 'Gitub Release URL'
+    required: true
 
 branding:
   icon: 'upload-cloud'
