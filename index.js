@@ -32,6 +32,7 @@ async function syncChangelogToJira(changelog, jiraVersion, url) {
   try {
     core.info(`jiraVersion is: ${jiraVersion}`)
     core.info(`changelog is: ${changelog}`)
+    core.info(`url is: ${url}`)
 
     createVersionAndUpdateFixVersions(changelog, jiraVersion, url)
   } catch (err) {
